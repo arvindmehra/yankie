@@ -1,0 +1,25 @@
+general:
+  branches:
+    only:
+      - staging
+
+machine:
+  ruby:
+    version:
+      2.2.0
+
+database:
+  override:
+    - echo "NOP"
+
+test:
+  override:
+    - echo "NOP"
+
+deployment:
+  staging:
+    branch: staging
+    commands:
+      - eval `ssh-agent -s`
+      - ssh-add /home/ubuntu/.ssh/id_circleci_github
+      - bundle exec cap staging deploy

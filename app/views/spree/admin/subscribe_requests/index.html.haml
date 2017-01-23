@@ -1,0 +1,31 @@
+- content_for :page_title do
+  = Spree.t(:squid_payments)
+
+- if can?(:create, Spree::SubscribeRequest)
+  - content_for :page_actions do
+    = button_link_to Spree.t(:new_squid_payment_application), new_object_url, class: 'btn-success', icon: 'add'
+
+= paginate @subscribe_requests
+
+%table.table
+  %thead
+    %tr{"data-hook" => "subscribe_request"}
+      %th= Spree.t(:email)
+      %th= Spree.t(:have_already_account)
+      %th= Spree.t(:existing_account_number)
+      %th= Spree.t(:surname)
+      %th= Spree.t(:state)
+      %th= Spree.t(:change_state)
+  %tbody
+    - @subscribe_requests.each do |subscribe_request|
+      %tr{"data-hook" => "subscribe_request_row"}
+        %td= subscribe_request.service_provider.email
+        %td= subscribe_request.have_already_account
+        %td= subscribe_request.existing_account_number
+        %td= subscribe_request.surname
+        %td= subscribe_request.state
+        %td.actions.actions-3.text-right
+          = link_to_with_icon 'ok', 'Approve', change_state_admin_subscribe_request_path(subscribe_request, new_state: :approve), { class: 'btn btn-success btn-sm', method: :put } if can?(:change_state, subscribe_request) && subscribe_request.state_events.include?(:approve)
+          = link_to_with_icon 'remove', 'Reject', change_state_admin_subscribe_request_path(subscribe_request, new_state: :reject), { class: 'btn btn-danger btn-sm', method: :put } if can?(:change_state, subscribe_request) && subscribe_request.state_events.include?(:reject)
+          = link_to_with_icon 'flag', 'To Review', change_state_admin_subscribe_request_path(subscribe_request, new_state: :to_review), { class: 'btn btn-warning btn-sm', method: :put } if can?(:change_state, subscribe_request) && subscribe_request.state_events.include?(:to_review)
+          = link_to_with_icon 'folder-open', 'Show', admin_subscribe_request_path(subscribe_request), { class: 'btn btn-info btn-sm' } if can?(:display, subscribe_request)

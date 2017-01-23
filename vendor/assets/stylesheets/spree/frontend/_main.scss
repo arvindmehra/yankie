@@ -1,0 +1,39 @@
+body {
+  background: #eeeeee;
+}
+
+.wrapper {
+  max-width: 1200px;
+  background: #fff;
+  margin: 0 auto;
+}
+
+.wrap-padding {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#breadcrumbs {
+  float: none
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row-eq-height > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-hook="cart_container"] {
+  padding-bottom: 100px !important;
+}

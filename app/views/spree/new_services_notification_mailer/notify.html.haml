@@ -1,0 +1,13 @@
+.div
+  %p.lede
+    = Spree.t('order_mailer.confirm_email.dear_customer')
+  %p
+    We'd like to let you know that there is a serivce for you and your location
+
+  .div
+    This is
+    = link_to @product.name, product_url(@product)
+    Enjoy!
+
+  %p
+    = Spree.t('order_mailer.confirm_email.thanks')

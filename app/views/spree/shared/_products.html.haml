@@ -1,0 +1,100 @@
+.banner.wrap-padding
+  = image_tag 'banner.jpg'
+  .banner-text
+    %p The eCommerce Platform For
+    %p Professional Service Providers!
+    %p.italic Don't be an amateur
+    %a.banner-button{href: 'user/spree_user/sign_up'} START TODAY
+.main.wrap-padding
+  - if cookies['user_latitude'].nil?
+    #no_detected_location_yet.text-center
+      %div We are detecting your location.
+      %div Please wait a little bit. You will be automatically redirected to a shop according your geolocation.
+  - elsif @products.exists?
+    .group
+      .title yoyakka’s top pick
+      .group-items
+        - @products.first_four_for_by_criteria(:yoyakkas_top_pick).each do |product|
+          = render 'spree/shared/product', product: product
+        .clearfix
+      .more
+        %a{href: "#"}
+          more
+          %span »
+    .group
+      .title more yoyakka picks
+      .group-items
+        - @products.first_four_for_by_criteria(:more_yoyakka_picks).each do |product|
+          = render 'spree/shared/product', product: product
+        .clearfix
+      .more
+        %a{href: "#"}
+          more
+          %span »
+    .group
+      .title more options
+      .group-items
+        - @products.first_four_for_by_criteria(:more_options).each do |product|
+          = render 'spree/shared/product', product: product
+        .clearfix
+      .more
+        %a{href: "#"}
+          more
+          %span »
+  - elsif spree_current_user && spree_current_user.notification_requests.in_progress.exists?
+    #no_serives_for_location#in_progress_notification_requests.text-center
+      %div There are no services for your location
+      %div We will let you know once it is available.
+  - else
+    - # Handle the situation when there is no products for user's location.
+    #no_serives_for_location#no_in_progress_notification_requests.text-center
+      %div There are no services for your location
+      %div Leave your email here and we will let you know once it is available.
+      = form_for Spree::NotificationRequest.new do |f|
+        .form-inline
+          = f.text_field :email, placeholder: 'Your Email', class: 'form-control'
+          = f.submit 'Submit', class: 'btn btn-success'
+  .group.text-items.hidden
+    .title Aids for Life and Work
+    .group-items
+      %a.item{href: "#"}
+        .info
+          .top-text How to:
+          .name About BMC Sofware
+          .bottom-text https://www.youtube.com/watch?v=XqqAHDMRIl8
+        .clearfix
+      %a.item{href: "#"}
+        .info
+          .top-text How to:
+          .name About BMC Sofware
+          .bottom-text https://www.youtube.com/watch?v=XqqAHDMRIl8
+        .clearfix
+      %a.item{href: "#"}
+        .info
+          .top-text How to:
+          .name About BMC Sofware
+          .bottom-text https://www.youtube.com/watch?v=XqqAHDMRIl8
+        .clearfix
+      %a.item{href: "#"}
+        .info
+          .top-text How to:
+          .name About BMC Sofware
+          .bottom-text https://www.youtube.com/watch?v=XqqAHDMRIl8
+        .clearfix
+      .clearfix
+    .more
+      %a{href: "#"}
+        more
+        %span »
+  .group.pre-footer
+    .group-items
+      %a.item{href: '/contact_requests/new'}
+        .img.glyphicon.glyphicon-envelope
+        .info We want to hear from you!
+      %a.item{href: '/pages/faq'}
+        .img.glyphicon.glyphicon-copy
+        .info Review a past or repeating service
+      %a.item{href: '/pages/faq'}
+        .img.glyphicon.glyphicon-question-sign
+        .info.faq FAQ's
+      .clearfix

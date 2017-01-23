@@ -1,0 +1,63 @@
+#form_request.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  - variant = @product.main_corresponded_location_variant cookies['user_latitude'], cookies['user_longitude'], cookies['user_country']
+  = form_for :order, url: populate_orders_path do |f|
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title Request
+        .modal-body
+          #inside-product-cart-form.row{"data-hook" => "inside_product_cart_form", :itemprop => "offers", :itemscope => "", :itemtype => "https://schema.org/Offer"}
+            = hidden_field_tag "variant_id", variant.try(:id)
+            = hidden_field_tag "quantity", 1
+            - if @product.price_in(current_currency) && !@product.price.nil?
+              .col-md-7{"data-hook" => "product_price"}
+                #product-price.col-md-4
+                  %h6.product-section-title= Spree.t(:price)
+                  %div
+                    %span.lead.price.selling{:itemprop => "price"}
+                      = current_variant_price variant
+                    %span{:content => @product.currency, :itemprop => "priceCurrency"}
+                  - if @product.master.can_supply?
+                    %link{:href => "https://schema.org/InStock", :itemprop => "availability"}/
+                  - elsif @product.variants.empty?
+                    %br/
+                    %span.out-of-stock= Spree.t(:out_of_stock)
+                #product-duration.col-md-4
+                  %h6.product-section-title= Spree.t(:duration)
+                  %div
+                    %span.lead.duration.selling{:itemprop => "duration"}
+                      = @product.duration.utc.strftime('%H:%M')
+                - if @product.can_supply?
+                  .add-to-cart
+                    = fields_for :options do |f_opt|
+                      %br/
+                      .col-md-12= f_opt.label :completion_date, 'This request is necessary to complete to:*'
+                      %br/
+                      .input-group
+                        .col-md-6
+                          .inner-addon.right-addon
+                            %i.glyphicon.glyphicon-calendar
+                            = f_opt.text_field :completion_date, class: 'datepicker form-control', placeholder: 'Completion date'
+                        .col-md-6
+                          .inner-addon.left-addon
+                            %i.glyphicon.glyphicon-time
+                            = f_opt.select :completion_time, [], {}, class: 'select2 form-control', placeholder: 'Please enter the details of your request. '
+                        %br/
+                        .col-md-10= f_opt.text_area :details, size: "70x5", placeholder: 'Please enter the details of your request. '
+            - else
+              #product-price
+                %br/
+                %div
+                  %span.price.selling{:itemprop => "price"}
+                    = Spree.t('product_not_available_in_this_currency')
+
+        %div.container
+          .col-md-6
+            = f.fields_for :ship_address do |ff|
+              -ff.object = @address_obj
+              = render partial: 'spree/products/address', locals: { form: ff, address_type: 'shipping', address:  @address_obj }
+        .modal-footer
+          = button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do
+            = Spree.t(:add_to_cart)
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= Spree.t(:close)

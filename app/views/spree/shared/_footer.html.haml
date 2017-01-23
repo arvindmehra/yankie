@@ -1,0 +1,44 @@
+%footer
+  .item.col-xs-3
+    .title Company
+    .link
+      .col-xs-6
+        %a{:href => '/about_yoyakka'} About yoyakka
+        %a{:href => '/exciting_news'} Exciting News
+        %a{:href => '/promotional_events'} Promotional Events
+      .col-xs-6
+        %a{:href => '/careers'} Careers
+        %a{:href => '/feedback'} Feedback
+        %a{:href => '/global_contacts'} Global Contacts
+  .item.col-xs-3
+    .title Suppliers
+    .link
+      %a{:href => '/yoyakkas_value_proposition'} yoyakka's Value Proposition
+      %a{:href => '/market_development'} Market Development
+      %a{:href => '/service_performance_measurements'} Service Performance Measurements
+  .item.col-xs-3
+    .title Customers
+    .link
+      %a{:href => '/our_commitment_to_our_customers'} Our Commitment to our Customers
+      %a{:href => '/yoyakka_in_your_backyard'} yoyakka in your backyard?
+      %a{:href => '/ratings_and_customer_feedback'} Ratings and Customer Feedback
+  .item.col-xs-3
+    .title Search
+    = form_tag spree.products_path, method: :get, id: 'footer_global_search', class: 'search' do
+      = hidden_field_tag :taxon, @taxon ? @taxon.id : params[:taxon].to_s
+      = search_field_tag :keywords, params[:keywords], placeholder: 'Search'
+      %button{name: 'submit', type: 'submit', class: 'glyphicon glyphicon-search'}
+  .bottom-block.col-xs-12
+    .logo
+      = image_tag 'yoyakka_footer_logo.png'
+    .info
+      .links
+        %a{:href => '/contact'} Contact
+        %a{:href => '/free'} Free
+        %a{:href => '/legal'} Legal
+        %a{:href => '/logs'} Logs
+        %a{:href => '/apps'} Apps
+        .clearfix
+      .copy Copyright 2005-2016
+    .clearfix
+  .clearfix

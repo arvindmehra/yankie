@@ -1,0 +1,18 @@
+default: &default
+  host: https://api.staging.sqidpay.com/post
+  api_key: <%= ENV["SQID_API_KEY"] %>
+  api_passphrase: <%= ENV["SQID_API_PASSPHRASE"] %>
+  api_merchant_code: <%= ENV["SQID_MERCHANT_CODE"] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
+  # host: https://api.sqidpay.com/post

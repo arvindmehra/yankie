@@ -1,0 +1,11 @@
+- content_for :page_title do
+  = Spree.t(:new_sqid_payment_application)
+
+<!-- Add new button link which will redirct to sqidpayments -->
+= link_to "Do not have a Squid Account, Please click here", "https://sqidpayments.com.au/merchant_application/",:target => "_blank"
+
+<!-- Added Style for hide form -->
+= form_for [:admin, @subscribe_request],html:{style:"display:block"} do |f|
+  = render partial: 'form', locals: { f: f, disabled: @disabled }
+  .text-center
+    = render partial: 'spree/admin/shared/new_resource_links' unless @disabled

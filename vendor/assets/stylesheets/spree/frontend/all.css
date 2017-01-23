@@ -1,0 +1,43 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require spree/frontend
+
+ *= require_self
+ *= require_tree .
+ *= require jquery-ui/datepicker
+ *= require bootstrap-datetimepicker
+ *= require spree/frontend/spree_static_content
+ *= require jquery.fancybox
+*/
+
+/* enable absolute positioning  *= require spree/frontend/spree_static_content
+*/
+.inner-addon {
+  position: relative;
+}
+
+/* style icon  *= require spree/frontend/spree_static_content
+*/
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+/* align icon  *= require spree/frontend/spree_static_content
+*/
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding   *= require spree/frontend/spree_static_content
+*/
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.glyphicon.glyphicon-star-empty, .glyphicon.glyphicon-star { color: #f86e00; }
+
+#checkout.wrap-padding { padding-top: 40px; padding-bottom: 40px; }

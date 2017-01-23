@@ -1,0 +1,17 @@
+#form_leave_feedback.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  - variant = @product.main_corresponded_location_variant cookies['user_latitude'], cookies['user_longitude'], cookies['user_country']
+  = form_for [spree_current_user, spree_current_user.user_feedbacks.build] do |f|
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+          %h4.modal-title Leave a feedback
+        .modal-body
+          .col-md-3= f.label :stars, 'Number of stars: '
+          .col-md-3= f.number_field :stars, in: 1..5
+          .col-md-12= f.text_area :text, size: "70x5", placeholder: 'Please enter your opinion about this service provider. '
+          = f.hidden_field "service_provider_id", value: @product.service_provider.id
+        .modal-footer
+          = button_tag class: 'btn btn-success', id: 'add-to-cart-button', type: :submit do
+            = 'Rate now'
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"}= Spree.t(:close)

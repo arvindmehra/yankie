@@ -1,0 +1,3 @@
+$('.user-location').html("<%= j(render 'spree/shared/header_map') %>");
+
+saveUserLocationToCookies("<%= @coords[:latitude] %>", "<%= @coords[:longitude] %>", "<%= @coords[:country] %>");

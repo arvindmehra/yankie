@@ -1,0 +1,31 @@
+<!doctype html>
+<!--[if lt IE 7 ]> <html class="ie ie6" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie ie7" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie ie8" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie ie9" lang="<%= I18n.locale %>"> <![endif]-->
+<!--[if gt IE 9]><!--><html lang="<%= I18n.locale %>"><!--<![endif]-->
+  <head data-hook="inside_head">
+    <%= include_gon %>
+    <%= render partial: 'spree/shared/head' %>
+  </head>
+  <body class="<%= body_class %>" id="<%= @body_id || 'default' %>" data-hook="body">
+    <div class="wrapper" data-latitude="<%= current_spree_user.latitude.to_s if current_spree_user %>" data-longitude="<%= current_spree_user.longitude.to_s if current_spree_user %>" data-country="<%= current_spree_user.country.try(:name).to_s if current_spree_user %>">
+      <%= render partial: 'spree/shared/google_analytics.js' %>
+      <%= render partial: 'spree/shared/header' %>
+
+      <div class="">
+        <%= breadcrumbs(@taxon) %>
+
+        <%= render partial: 'spree/shared/sidebar' if content_for? :sidebar %>
+
+        <div id="" class="content" data-hook>
+          <%= flash_messages %>
+          <%= yield %>
+        </div>
+
+        <%= yield :templates %>
+      </div>
+      <%= render partial: 'spree/shared/footer' %>
+    </div>
+  </body>
+</html>

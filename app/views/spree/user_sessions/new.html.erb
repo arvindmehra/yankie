@@ -1,0 +1,19 @@
+<% @body_id = 'login' %>
+<div class="panel panel-default">
+  <div class="header">
+    <a href="/" class="logo">
+      <%= image_tag 'yoyakka_logo.png' %>
+    </a>
+  </div>
+  <div id="existing-customer" class="panel-body" data-hook="login">
+    <% if flash[:error] %>
+      <div class="alert alert-danger"><%= flash[:error] %></div>
+    <% end %>
+    <%= render :partial => 'spree/shared/login' %>
+    <div class="footer">
+      <%= Spree.t(:or) %>
+        <%= link_to Spree.t(:create_a_new_account), spree.signup_path %> |
+        <%= link_to Spree.t(:forgot_password), spree.recover_password_path %>
+    </div>
+  </div>
+</div>

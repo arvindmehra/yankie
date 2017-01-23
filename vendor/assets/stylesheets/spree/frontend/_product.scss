@@ -1,0 +1,138 @@
+.modal-open {
+  .datepicker {
+    z-index: 1151 !important;
+  }
+
+  #options_completion_date {
+    text-align: center;
+  }
+  select#options_completion_time {
+    text-indent: 100px;
+  }
+}
+
+#product {
+  border-top: 2px solid #f0f0f0;
+
+  .rating {
+    .numbers_star {
+      line-height: 1;
+    }
+  }
+
+  .price {
+    color: #f86e00;
+  }
+
+  .actions {
+    margin: 30px 0px 5px 0px;
+
+    button {
+      margin: 15px 0px;
+
+      &.btn-warning {
+        background-color: #f86e00;
+      }
+    }
+  }
+
+  #product_right_part {
+    min-height: 700px;
+    margin-bottom: 20px;
+
+    #timeline {
+      margin: 15px;
+
+      textarea {
+        width: 100%;
+        border: 1px solid black;
+      }
+
+      .comment-actions {
+        background-color: #eeeeee;
+        border: 1px solid black;
+        margin-top: -6px;
+        button.btn-warning {
+          background-color: #f86e00;
+        }
+        .glyphicon {
+          padding: 0px 10px;
+          &.custom {
+            font-size: 20px;
+          }
+        }
+        a {
+          color: black;
+          text-decoration: none !important;
+        }
+      }
+    }
+
+    #product_description {
+      .product_description {
+        padding: 20px 0px 40px 0px;
+        margin: 0px 15px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .tab-content {
+        padding: 0px 5px;
+      }
+
+      ul.nav.nav-tabs {
+        &, li a {
+          background-color: #999999;
+          opacity: 0.7;
+          border: none;
+          color: #555555;
+        }
+
+        li {
+          display: inline-block;
+          float: none;
+          margin-bottom: 0px;
+        }
+
+        li.active:before {
+          content: "";
+          position: absolute;
+          bottom: -2px;
+          left: 50%;
+          margin-left: -10px;
+          display: block;
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 8px solid white;
+          z-index: 1
+        }
+      }
+    }
+  }
+}
+
+#product_related_services{
+  h2 {
+    padding-left: 15px;
+  }
+
+  .related-service {
+    padding: 10px 0px;
+
+    .desription {
+      padding: 15px 0px;
+      line-height: 1;
+
+      .title {
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #product #product_right_part {
+    border-left: 2px solid #f0f0f0;
+  }
+}

@@ -1,0 +1,19 @@
+.nested-fields
+  .row
+    .col-md-6.form-group
+      = f.label :kind, Spree.t(:type)
+      = f.select :kind, Spree::VariantLocation.kinds.map { |key, value| [key.humanize, key] }, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }
+    .col-md-6.form-group
+      = f.label :country, Spree.t(:country)
+      %span#country= f.collection_select :country_id, available_countries, :id, :name, {}, { class: 'select2' }
+
+  .row
+    .col-md-6.form-group
+      = f.label :address, Spree.t(:address)
+      = f.text_field :address, class: 'form-control'
+    .col-md-6.form-group
+      = f.label :radius_km, Spree.t(:radius_km)
+      = f.text_field :radius_km, class: 'form-control'
+    .col-md-12= link_to_remove_association 'remove service location', f
+
+  %br

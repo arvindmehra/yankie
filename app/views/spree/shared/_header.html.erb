@@ -1,0 +1,259 @@
+<header>
+  <div class="user-location">
+  </div>
+  <div class="logo-block wrap-padding">
+    <a href="/" class="logo">
+      <%= image_tag 'yoyakka_logo.png' %>
+    </a>
+    <% if spree_current_user %>
+      <div class="btn-group user-profile">
+        <div class="profile dropdown-toggle" data-toggle="dropdown">
+          <div class="photo">
+            <div class="img"></div>
+            <div class="status online on"></div>
+            <div class="status away"></div>
+            <div class="status do-not-disturb"></div>
+            <div class="status offline"></div>
+          </div>
+          <div class="name"><%= spree_current_user.try :email %></div>
+          <div class="glyphicon glyphicon-chevron-down"></div>
+        </div>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to 'Edit profile', account_path %></li>
+            <% if spree_current_user.is_service_provider? %>
+              <li><%= link_to 'Account Admin', admin_path %></li>
+            <% end %>
+            <li class="divider"></li>
+            <li><%= link_to 'Logout', logout_path %></li>
+          </ul>
+      </div>
+    <% else %>
+      <div class="pull-right">
+        <%= link_to 'Sign in', new_spree_user_session_path, class: 'btn btn-default' %>
+        <%= link_to 'Sign up', new_spree_user_registration_path, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+    <div class="clearfix"></div>
+  </div>
+  <div class="menu wrap-padding">
+    <ul>
+      <li class="<%= active_class?(:catalog_page?) %>">
+        <a href="/products">Catalog</a>
+      </li>
+      <li class="<%= active_class?(:my_services_page?) %>">
+        <a href="/users/my_services">My services</a>
+      </li>
+      <li class="<%= active_class?(:edit_location_page?) %>">
+        <a href='/users/edit_location'>Location</a>
+      </li>
+    </ul>
+    <div class="links">
+      <% if spree_current_user %>
+        <a href="/cart"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></a>
+      <% end %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+<%= form_tag spree.products_path, method: :get, id: 'global_search' do %>
+  <div class="sub-menu wrap-padding">
+    <div class="btn-group categories">
+      <div class="browse-cat dropdown-toggle" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-inbox"></span>
+        <span id="browse_categories">Browse categories</span>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </div>
+      <ul class="dropdown-menu" role="menu">
+<!--         <% filters = @taxon ? @taxon.applicable_filters : [Spree::Core::ProductFilters.all_taxons] %> -->
+        <% filters = [Spree::Core::ProductFilters.all_taxons] %>
+        <% filters.each do |filter| %>
+          <% labels = filter[:labels] || filter[:conds].map {|m,c| [m,m]} %>
+          <% next if labels.empty? %>
+          <% labels.each do |nm, val| %>
+            <% label = nm %>
+            <li data-value="<%= val %>"><%= label %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="search-block">
+      <%= hidden_field_tag :taxon, @taxon ? @taxon.id : params[:taxon].to_s %>
+      <%= search_field_tag :keywords, params[:keywords], placeholder: 'Search For Service' %>
+      <button type="submit" name="submit" class="glyphicon glyphicon-search"></button>
+      <div class="search-result">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#all" data-toggle="tab">All(4)</a></li>
+          <li><a href="#elements" data-toggle="tab">Elements(2)</a></li>
+          <li><a href="#action" data-toggle="tab">Action(1)</a></li>
+          <li><a href="#resource" data-toggle="tab">Resource(3)</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="all">
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 1</span>
+                </div>
+                <div class="type">Action</div>
+                <div class="additional">
+                  <div class="view">View</div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                      <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 2</span>
+                </div>
+                <div class="type">Element</div>
+                <div class="additional">
+                  <div class="rating">
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star-empty"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 1</span>
+                </div>
+                <div class="type">Action</div>
+                <div class="additional">
+                  <div class="view">View</div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 2</span>
+                </div>
+                <div class="type">Element</div>
+                <div class="additional">
+                  <div class="rating">
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star-empty"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="tab-pane" id="elements">
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 1</span>
+                </div>
+                <div class="type">Action</div>
+                <div class="additional">
+                  <div class="view">View</div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 2</span>
+                </div>
+                <div class="type">Element</div>
+                <div class="additional">
+                  <div class="rating">
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star-empty"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="tab-pane" id="action">
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 1</span>
+                </div>
+                <div class="type">Action</div>
+                <div class="additional">
+                  <div class="view">View</div>
+                </div>
+              </a>
+            </div>
+            <div class="tab-pane" id="resource">
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 2</span>
+                </div>
+                <div class="type">Element</div>
+                <div class="additional">
+                  <div class="rating">
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star-empty"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 1</span>
+                </div>
+                <div class="type">Action</div>
+                <div class="additional">
+                  <div class="view">View</div>
+                </div>
+              </a>
+              <a href="#">
+                <div class="name">
+                  <div class="ico">
+                    <%= image_tag "ipad2.jpg" %>
+                  </div>
+                  <span>Result 2</span>
+                </div>
+                <div class="type">Element</div>
+                <div class="additional">
+                  <div class="rating">
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star"></div>
+                    <div class="star glyphicon glyphicon-star-empty"></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+<% end %>
+</header>

@@ -1,0 +1,21 @@
+<% @body_id = 'recover' %>
+<div class="panel panel-default">
+  <div class="header">
+    <a href="/" class="logo">
+      <%= image_tag 'yoyakka_logo.png' %>
+    </a>
+  </div>
+  <div class="panel-body">
+    <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @spree_user } %>
+    <p><%= Spree.t(:instructions_to_reset_password) %></p>
+
+    <%= form_for Spree::User.new, :as => :spree_user, :url => spree.reset_password_path do |f| %>
+      <p>
+        <%= f.email_field :email, :class => "form-control", placeholder: 'Email' %>
+      </p>
+      <p>
+        <%= f.submit Spree.t(:reset_password), :class => 'btn btn-lg btn-success btn-block' %>
+      </p>
+    <% end %>
+  </div>
+</div>

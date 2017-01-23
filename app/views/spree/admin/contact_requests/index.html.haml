@@ -1,0 +1,21 @@
+- content_for :page_title do
+  = Spree.t(:contact_requests)
+
+= paginate @contact_requests
+
+%table.table
+  %thead
+    %tr{"data-hook" => "contact_request"}
+      %th= Spree.t(:email)
+      %th= Spree.t(:name)
+      %th= Spree.t(:phone)
+      %th= Spree.t(:subject)
+      %th= Spree.t(:action)
+  %tbody
+    - @contact_requests.each do |contact_request|
+      %tr{"data-hook" => "contact_request_row"}
+        %td= contact_request.email
+        %td= contact_request.name
+        %td= contact_request.phone
+        %td= contact_request.subject
+        %td= link_to_with_icon 'folder-open', 'Show', admin_contact_request_path(contact_request), { class: 'btn btn-info btn-sm' } if can?(:display, contact_request)

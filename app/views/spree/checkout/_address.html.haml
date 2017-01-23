@@ -1,0 +1,8 @@
+.row
+  .col-sm-6{"data-hook" => "billing_fieldset_wrapper"}
+    #billing.panel.panel-default{"data-hook" => ""}
+      = form.fields_for :bill_address do |bill_form|
+        .panel-heading
+          %h3.panel-title= Spree.t(:billing_address)
+        .panel-body
+          = render :partial => 'spree/address/form', :locals => { :form => bill_form, :address_type => 'billing', :address => @order.bill_address }

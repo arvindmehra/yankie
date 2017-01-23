@@ -1,0 +1,9 @@
+.main.wrap-padding
+  - if @my_services.exists?
+    .group
+      .group-items
+        - @my_services.each do |product|
+          = render 'spree/shared/product', product: product
+        .clearfix
+  - else
+    %h3.text-center You are currently not following any of our service providers

@@ -1,0 +1,30 @@
+- content_for :page_title do
+  = Spree.t(:user_feedback)
+
+- if @user_feedbacks.blank?
+
+  .alert.alert-info.no-objects-found
+    There is no user feedbacks for review! :)
+
+- else
+  %table.table
+    %thead
+      %tr{"data-hook" => "user_feedback"}
+        %th= Spree.t(:user)
+        %th= Spree.t(:service_provider)
+        %th= Spree.t(:stars)
+        %th= Spree.t(:text)
+        %th= Spree.t(:state)
+        %th= Spree.t(:change_state)
+    %tbody
+      - @user_feedbacks.each do |user_feedback|
+        %tr{"data-hook" => "user_feedback_row"}
+          %td= user_feedback.user.email
+          %td= user_feedback.service_provider.email
+          %td= user_feedback.stars
+          %td= user_feedback.text
+          %td= user_feedback.state
+          %td.actions.actions-3.text-right
+            = link_to_with_icon 'ok', 'Approve', change_state_admin_user_feedback_path(user_feedback, new_state: :approve), { class: 'btn btn-success btn-sm', method: :put } if can?(:change_state, user_feedback) && user_feedback.state_events.include?(:approve)
+            = link_to_with_icon 'remove', 'Reject', change_state_admin_user_feedback_path(user_feedback, new_state: :reject), { class: 'btn btn-danger btn-sm', method: :put } if can?(:change_state, user_feedback) && user_feedback.state_events.include?(:reject)
+            = link_to_with_icon 'flag', 'To Review', change_state_admin_user_feedback_path(user_feedback, new_state: :to_review), { class: 'btn btn-warning btn-sm', method: :put } if can?(:change_state, user_feedback) && user_feedback.state_events.include?(:to_review)

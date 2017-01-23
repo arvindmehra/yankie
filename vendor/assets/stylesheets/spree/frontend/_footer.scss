@@ -1,0 +1,148 @@
+#up_list {
+  top: 0;
+}
+#down_list {
+  bottom: 0;
+}
+.visible {
+  display: block!important;
+}
+
+footer {
+  background: #414042;
+  padding: 40px 38px;
+
+  .title {
+    border-bottom: 1px solid #abacae;
+    color: #abacae;
+    font-weight: bold;
+    font-size: 16px;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+  }
+
+  .item {
+    padding: 0;
+    margin-right: 28px;
+  }
+
+  .item a {
+    color: #fff;
+    font-size: 11px;
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  .item .search {
+    position: relative;
+    width: 75%;
+  }
+
+  .item .search input {
+    width: 100%;
+    height: 34px;
+    border: 1px solid #676769;
+    border-radius: 4px;
+    padding-left: 7px;
+    font-size: 11px;
+  }
+
+  .item .search button {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    width: 31px;
+    height: 30px;
+    border: none;
+    background-color: white;
+    background-size: 15px 14px;
+  }
+
+  .bottom-block {
+    margin-top: 50px;
+    padding-left: 0;
+  }
+
+  .bottom-block .logo {
+    width: 152px;
+    float: left;
+  }
+
+  .bottom-block .logo img {
+    width: 100%;
+  }
+
+  .bottom-block .info {
+    float: left;
+    margin-left: 44px;
+    font-size: 11px;
+  }
+
+  .bottom-block .info .links {
+    margin-left: -9px;
+    margin-bottom: 5px;
+  }
+
+  .bottom-block .info .links a {
+    color: #fff;
+    display: block;
+    padding: 0 9px;
+    height: 15px;
+    line-height: 15px;
+    float: left;
+    border-left: 1px solid #919191;
+  }
+
+  .bottom-block .info .links a:first-child {
+    border: none;
+  }
+
+  .bottom-block .info .copy {
+    color: #8c8d95;
+  }
+
+  .item .col-xs-6 {
+    padding: 0;
+  }
+
+  .col-xs-3 {
+    width: 22%;
+  }
+}
+
+@media screen and (max-width: 1216px) and (min-width: 923px) {
+  footer .item {
+    margin-bottom: 15px;
+  }
+  footer .bottom-block {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 922px) {
+  footer .item {
+    width: 42%;
+    margin-right: 8%;
+  }
+  footer .item {
+    margin-bottom: 15px;
+  }
+  footer .bottom-block {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 636px) {
+  footer .item {
+    width: 100%;
+    margin-right: 0;
+  }
+  footer .bottom-block .logo {
+    float: none;
+  }
+  footer .bottom-block .info {
+    float: none;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

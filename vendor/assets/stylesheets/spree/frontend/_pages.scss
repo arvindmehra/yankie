@@ -1,0 +1,47 @@
+#faq_page {
+  #about_us_banner {
+    background-image: asset-url('yo-faq-banner-bg.png');
+    display: table;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 390px;
+
+    & > .container {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .learn-more {
+      background: #ff4e00;
+      color: #fff;
+      cursor: inherit;
+    }
+
+    .learn-more:hover {
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .play-btn {
+      display: block;
+      margin: 15px auto 0;
+      width: 150px;
+      height: 150px;
+        opacity: 0.7;
+    }
+
+    .play-btn:hover {
+      opacity: 1;
+    }
+
+    .play-btn img {
+      width: 100%;
+    }
+  }
+
+  .title {
+    color: #ff4e00;
+    font-size: 60px;
+  }
+}

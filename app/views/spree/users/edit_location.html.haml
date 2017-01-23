@@ -1,0 +1,5 @@
+.main.wrap-padding
+  %h2.text-center
+    = "Your location is  #{ if cookies[:address].present? then cookies[:address]  else current_address end} "
+    %div
+      = link_to 'Reset my location', reset_location_users_path, class: 'btn btn-danger', method: :put

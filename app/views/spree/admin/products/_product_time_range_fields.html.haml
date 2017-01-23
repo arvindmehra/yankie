@@ -1,0 +1,19 @@
+.nested-fields
+  .row
+    .col-md-6.form-group
+      = f.label :week_day, 'Every week day'
+      = f.select :week_day, Spree::ProductTimeRange.week_days.map { |key, value| [key.humanize, key] }, { include_blank: Spree.t('match_choices.none') }, { class: 'select2' }
+    .col-md-6.form-group
+      = f.label :specific_date, Spree.t(:specific_date)
+      = f.text_field :specific_date, class: 'datepicker datepicker-from form-control', placeholder: 'Specific Date'
+
+  .row
+    .col-md-4.form-group
+      = f.label :time_from, Spree.t(:time_from)
+      = f.time_select :time_from#, {}, class: 'select2'
+    .col-md-4.form-group
+      = f.label :time_to, Spree.t(:time_to)
+      = f.time_select :time_to#, {}, class: 'select2'
+    .col-md-4= link_to_remove_association 'remove time range', f
+
+  %br

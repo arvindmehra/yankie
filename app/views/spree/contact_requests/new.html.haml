@@ -1,0 +1,32 @@
+.main.wrap-padding
+  = form_for @contact_request do |form|
+    .row
+      .col-md-6.col-md-offset-3
+        .panel.panel-default
+          .panel-body
+            %h2.text-center Contact us
+            = render partial: 'spree/shared/error_messages', locals: { target: @contact_request }
+            .form-group
+              = form.label :name
+              = form.text_field :name, class: 'form-control'
+              = form.error_message_on :name
+            .form-group
+              = form.label :email
+              = form.text_field :email, class: 'form-control'
+              = form.error_message_on :name
+            .form-group
+              = form.label :phone
+              = form.text_field :phone, class: 'form-control'
+              = form.error_message_on :phone
+            .form-group
+              = form.label :subject
+              = form.text_field :subject, class: 'form-control'
+              = form.error_message_on :subject
+
+            .form-group
+              = form.label :message
+              = form.text_area :message, rows: 6, class: 'form-control'
+              = form.error_message_on :message
+
+            .form-group.text-center
+              = form.submit class: 'btn btn-success'

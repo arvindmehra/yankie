@@ -1,0 +1,8 @@
+#product_time_ranges
+  = f.fields_for :product_time_ranges do |product_time_range|
+    = render 'product_time_range_fields', f: product_time_range
+
+  .links
+    = link_to_add_association 'Add a new time range', f, :product_time_ranges
+
+  %br

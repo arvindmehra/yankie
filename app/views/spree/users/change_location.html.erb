@@ -1,0 +1,12 @@
+<div class="row">
+<div class="container">
+<div class="col-md-6 col-md-offset-3">
+	<%=form_for :user,url:{action:'set_address'} do |ff|%>
+		<%= render partial: 'spree/address/form', locals: { form: ff, address_type: 'shipping', address: @address } %>
+			<div class="text-center">
+				<%=ff.submit "Set And Confirm Address", class:"btn btn-primary"%>
+			</div>
+	<%end%>
+</div>
+</div>
+</div>

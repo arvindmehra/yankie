@@ -1,0 +1,18 @@
+<div class="map wrap-padding">
+  <div class="map-img">
+    <img src='https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=1200x196&maptype=roadmap%20&markers=color:red|size:mid|<%= "#{@coords[:latitude]},#{@coords[:longitude]}" %>'>
+  </div>
+  <div class="map-item">
+    <% if  (cookies["location_confirmed"]=="false" || cookies["location_confirmed"] == false) %>
+      <div>It looks like you are located in <%= @coords[:country] %>.</div>
+      <%= link_to 'Please Confirm Location »', confirm_location_users_path, method: :put %>
+      <%= link_to 'Change Location »', change_location_users_path%>
+    <% end %>
+    <!-- <div>Or place your postal / zip code here.</div> -->
+    <%#= form_tag set_location_users_path, as: :user do %>
+      <%#= text_field_tag :address, nil, name: 'user[address]' %>
+      <%#= button_tag 'Go »' %>
+    <% #end %>
+  </div>
+  <div class="bg-map"></div>
+</div>

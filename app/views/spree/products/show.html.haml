@@ -1,0 +1,75 @@
+.wrap-padding
+  - @body_id = @product.id
+  - variant = @product.main_corresponded_location_variant cookies['user_latitude'], cookies['user_longitude'], cookies['user_country']
+
+  .row-eq-height#product
+    .col-sm-4.col-xs-12#product_left_part
+      #product_images
+        #main_image.text-center
+          = render partial: 'image'
+      #product_title
+        %h1= @product.name
+      .rating#leave_feedback
+        - if @product.service_provider.service_provider_rating.present?
+          .star.glyphicon{class: @product.service_provider.service_provider_rating.value >= 1 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+          .star.glyphicon{class: @product.service_provider.service_provider_rating.value >= 2 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+          .star.glyphicon{class: @product.service_provider.service_provider_rating.value >= 3 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+          .star.glyphicon{class: @product.service_provider.service_provider_rating.value >= 4 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+          .star.glyphicon{class: @product.service_provider.service_provider_rating.value >= 5 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+          .numbers_star= "(#{@product.service_provider.service_provider_rating.service_provider_feedbacks.approved.count})"
+
+      .price= current_variant_price variant if variant.present?
+      .actions
+        .btns-group
+          - if @product.service_provider.pro_service_provider?
+            = link_to '#' do
+              = button_tag 'Request', { class: 'btn btn-default btn-block btn-warning', data: { toggle: 'modal', target: '#form_request' } }
+          - else
+            = mail_to  @product.service_provider.email, @product.service_provider.email, class: 'btn btn-default btn-block btn-warning'
+          - if spree_current_user
+            - if spree_current_user.followed_for?(@product)
+              - # Fake! Need to pass real a follow_service or change the route
+              = link_to product_follow_service_path(@product.id, 1), method: :delete do
+                = button_tag '&#9733; Unfollow'.html_safe, class: 'btn btn-default btn-block'
+            - else
+              = link_to product_follow_services_path(@product.id), method: :post do
+                = button_tag '&#9734; Follow'.html_safe, class: 'btn btn-default btn-block'
+      - if spree_current_user
+        #form_rservice_request= render 'form_request'
+        #modal_leave_feedback= render 'spree/shared/form_leave_feedback'
+      %h2 Supplier Information
+      %ul#product_supplier_information.list-unstyled
+        %li
+          %strong Phone:
+          -# =current_service_provider_phone(@product)
+        %li
+          %strong Website:
+          -# =link_to @product.service_provider.website, @product.service_provider.website, :target => "_blank" if @product.service_provider.website.present?
+        %li
+          %strong Company Description:
+          -# = @product.service_provider.company_description if @product.service_provider.company_description.present?
+        %li
+          %strong Categories:
+          = @product.taxons.first.name if @product.taxons.present?
+        %li
+          %strong Duration:
+          = @product.duration.utc.strftime('%H:%M').to_s + " hour(s)"
+        %li
+          %strong Email:
+          = mail_to @product.service_provider.email
+    .col-sm-8.col-xs-12
+      #product_right_part
+        #product_images
+          #main_imageer.text-center
+            = render 'image', image: @product.images.last
+        #product_description
+          / Nav tabs
+          %ul.nav.nav-tabs.text-center{role: "tablist"}
+            %li.active{role: "presentation"}
+              %a{"aria-controls" => "product_details", "data-toggle" => "tab", href: "#product_details", role: "tab"}
+          / Tab panes
+          .tab-content
+            #product_details.tab-pane.active{role: "tabpanel"}
+              .product_description
+                %h2 Description
+                = @product.description

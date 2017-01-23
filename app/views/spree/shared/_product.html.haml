@@ -1,0 +1,14 @@
+= link_to spree.product_url(product, taxon_id: @taxon.try(:id)), itemprop: "url", class: 'item' do
+  .img
+    = small_image(product, itemprop: "image")
+  .info
+    .name= product.name
+    .rating
+      .star.glyphicon{class: product.service_provider.service_provider_rating.value >= 1 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+      .star.glyphicon{class: product.service_provider.service_provider_rating.value >= 2 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+      .star.glyphicon{class: product.service_provider.service_provider_rating.value >= 3 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+      .star.glyphicon{class: product.service_provider.service_provider_rating.value >= 4 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+      .star.glyphicon{class: product.service_provider.service_provider_rating.value >= 5 ? 'glyphicon-star' : 'glyphicon-star-empty'}
+      .clearfix
+    .price= display_price(product)
+  .clearfix

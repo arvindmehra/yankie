@@ -1,0 +1,6 @@
+#variant_locations.col-md-12
+  = f.fields_for :variant_locations do |variant_location|
+    = render 'variant_location_fields', f: variant_location
+
+  .links
+    = link_to_add_association 'Add a new service location', f, :variant_locations

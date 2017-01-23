@@ -1,0 +1,39 @@
+-# do not work for no reason. back_to_list_button is not found
+-# - content_for :page_actions do
+-#   = back_to_list_button(Spree::ContactRequest.model_name.human, admin_contact_requests_path)
+
+- button_text = Spree.t(:back_to_resource_list, resource: Spree::ContactRequest.model_name.human)
+- back_to_list_button = link_to_with_icon 'arrow-left', button_text, admin_contact_requests_path, class: 'btn btn-default'
+
+- content_for :page_actions do
+  = back_to_list_button
+
+.row
+  .col-md-10
+    %h2 User
+    = @contact_request.user.try(:email)
+
+.row
+  .col-md-10
+    %h2 Name
+    = @contact_request.name
+
+.row
+  .col-md-10
+    %h2 Email
+    = @contact_request.email
+
+.row
+  .col-md-10
+    %h2 Phone
+    = @contact_request.phone
+
+.row
+  .col-md-10
+    %h2 Subject
+    = @contact_request.subject
+
+.row
+  .col-md-10
+    %h2 Message
+    = @contact_request.message

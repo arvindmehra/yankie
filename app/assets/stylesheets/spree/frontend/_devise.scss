@@ -1,0 +1,90 @@
+body.devise {
+  text-align: center;
+  background: asset-url('devise_background.jpg') no-repeat center;
+  background-size: cover;
+
+  &#login {
+    .content .panel {
+      height: 325px;
+    }
+  }
+
+  &#recover {
+    .content .panel {
+      height: 230px;
+    }
+    .alert.alert-danger {
+      &, h3{
+        margin: 0px;
+        padding: 5px;
+        font-size: 12px;
+      }
+
+      br {
+        display: none;
+      }
+    }
+  }
+
+  &#signup {
+    .content .panel {
+      height: 382px;
+    }
+    .alert.alert-danger {
+      &, h3{
+        margin: 0px;
+        padding: 5px;
+        font-size: 12px;
+      }
+
+      br {
+        display: none;
+      }
+    }
+  }
+
+  .content {
+    min-height: 100vh;
+    background: asset-url("bg-map.png");
+
+    form {
+      input {
+        border-color: #fe4300;
+        border-width: 3px;
+        border-radius: 0px;
+      }
+
+      input[type='submit'] {
+        background-color: #fe4300;
+      }
+    }
+
+    a {
+      color: #fe4300;
+    }
+
+    .panel {
+      width: 30%;
+      position: absolute;
+      top:0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      opacity: 0.9;
+      margin: auto;
+
+      background-color: #f2f2f2;
+
+      .header {
+        margin: 20px 0px 5px 0px;
+      }
+
+      .footer {
+        margin: 20px 0px;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,15 @@
+---
+:concurrency: 5
+
+production:
+  :pidfile: tmp/pids/sidekiq.pid
+  :logfile: log/sidekiq.log
+  :verbose: true
+
+  :concurrency: <%= ENV['SIDEKIQ_CONCURRENCY'] || 25 %>
+
+:queues:
+  - [update,       6]
+  - [publish,      3]
+  - [default,      2]
+  - [mailers,      3]
